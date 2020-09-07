@@ -14,7 +14,7 @@
   },
   "firestore": {
     "rules": "packages/firebase/rules/firestore.rules",
-    "indexes": "firestore.indexes.json"
+    "indexes": "packages/firebase/firestore.indexes.json"
   },
   "functions": {
     "source": "dist/functions",
