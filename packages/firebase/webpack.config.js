@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const CopyPkgJsonPlugin = require('copy-pkg-json-webpack-plugin');

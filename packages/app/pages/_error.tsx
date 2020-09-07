@@ -4,7 +4,7 @@ import Head from 'next/head';
 import useI18n from '../hooks/use-i18n';
 import { contentLanguageMap } from '../lib/i18n';
 interface ErrorPageProps {
-  statusCode: number;
+  statusCode: null | number | undefined;
 }
 
 const Error: NextPage<ErrorPageProps> = ({ statusCode }: ErrorPageProps) => {
@@ -25,7 +25,7 @@ const Error: NextPage<ErrorPageProps> = ({ statusCode }: ErrorPageProps) => {
 };
 
 Error.getInitialProps = ({ res, err }): ErrorPageProps => {
-  let statusCode = null;
+  let statusCode: null | number | undefined = null;
   if (res) {
     ({ statusCode } = res);
   } else if (err) {

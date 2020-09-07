@@ -11,8 +11,8 @@ export const contentLanguageMap = { de: 'de-DE', en: 'en-US' };
 export const I18nContext = createContext<{
   activeLocale: string;
   t<X extends Record<string, any> | any[]>(key: string | (string | number)[], params?: X, lang?: string): string;
-  locale(l, dict): void;
-}>(undefined);
+  locale(l, dict?): void;
+}>({ activeLocale: defaultLanguage, t: (key: string) => key, locale: (l,dict)=> {}});
 
 // default language
 i18n.locale(defaultLanguage);
@@ -48,7 +48,7 @@ export const I18n: React.FC<{ locale: string; lngDict: Record<string, string> }>
       activeLocaleRef.current = l;
       if (dict) {
         i18n.set(l, dict);
-        setActiveDict(dict);
+        setActiveDict(dict!);
       } else {
         setTick((tick) => tick + 1);
       }

@@ -4,11 +4,11 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { firestore, auth, UserAccountData } from '@poolbase/common';
 
-export const UserContext = createContext({
-  user: null,
+export const UserContext = createContext<{ user: UserAccountData | undefined }>({
+  user: undefined,
 });
 
-export const useSession = (): UserAccountData | null => {
+export const useSession = (): UserAccountData | undefined => {
   const { user } = useContext(UserContext);
   return user;
 };
@@ -25,7 +25,7 @@ export const useAuthUserProfile = (): [UserAccountData | undefined, boolean, Err
   });
   const [user, loading, error] = useAuthState(auth);
 
-  const [userAccountDocReference, setUserAccountDocReference] = useState({ ref: null });
+  const [userAccountDocReference, setUserAccountDocReference] = useState<{ref: null | firebase.firestore.DocumentReference}>({ ref: null });
 
   const [userAccountData, dataAccountLoading, dataAccountError] = useDocumentData<UserAccountData & { id: string }>(
     userAccountDocReference.ref,
