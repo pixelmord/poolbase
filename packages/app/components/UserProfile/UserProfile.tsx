@@ -1,7 +1,6 @@
-/** @jsx jsx */
-import { jsx, Box } from 'theme-ui';
+import { Box } from '@chakra-ui/core';
 
-import { UserProfileData } from '@poolbase/common';
+import { UserProfileData } from 'lib/types';
 
 export interface UserProfileProps {
   profile: UserProfileData;

@@ -73,4 +73,3 @@ src/app/public/sw.js
 src/app/public/sw.js.map
 src/app/public/workbox-*.js
 src/app/public/workbox-*.js.map
-locales

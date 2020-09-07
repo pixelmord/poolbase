@@ -4,7 +4,8 @@
   "description": "Information pool for groups and companies",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "./packages/app",
+    "./packages/browser-extension"
   ],
   "main": "n/a",
   "scripts": {
@@ -25,9 +26,7 @@
   "keywords": [
     "pwa",
     "chrome extension",
-    "gatsby",
     "typescript",
-    "design-system",
     "react",
     "cloud functions",
     "firebase",
@@ -46,8 +45,8 @@
     "docsify": "^4.11.6",
     "docsify-cli": "^4.4.0",
     "dotenv-cli": "^3.1.0",
-    "firebase-tools": "^8.9.2",
-    "husky": "^4.2.5",
+    "firebase-tools": "^8.10.0",
+    "husky": "^4.3.0",
     "lerna": "^3.20.2",
     "semantic-release": "^17.0.7",
     "semantic-release-monorepo": "^7.0.2"

@@ -1,10 +1,10 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
+import * as React from 'react';
 import { NextPage } from 'next';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { ListItem } from '@poolbase/design-system/src/components/ListItem';
-import { PageData, firestore } from '@poolbase/common';
+import { ListItem } from 'components/ListItem';
+import { firestore } from 'lib/initFirebase';
+import { PageData } from 'lib/types';
 
 import { useI18n } from 'hooks';
 import { languages } from 'lib/i18n';
@@ -13,7 +13,6 @@ const HomePage: NextPage = () => {
   const query = firestore.collection('pages').orderBy('created', 'desc').limit(30);
   const [data, loading, error] = useCollectionData<PageData>(query, { idField: 'id' });
   const i18n = useI18n();
-
   return (
     <>
       <h1>{i18n.t('siteTitle')}</h1>
@@ -24,8 +23,8 @@ const HomePage: NextPage = () => {
   );
 };
 export async function getStaticProps({ params }) {
-  const { default: common = {} } = await import(`@poolbase/common/locales/${params.lng}/common.json`);
-  const { default: index = {} } = await import(`@poolbase/common/locales/${params.lng}/index.json`);
+  const { default: common = {} } = await import(`locales/${params.lng}/common.json`);
+  const { default: index = {} } = await import(`locales/${params.lng}/index.json`);
   const lngDict = {
     ...common,
     ...index,

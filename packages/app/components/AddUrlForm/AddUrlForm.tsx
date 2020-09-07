@@ -1,9 +1,11 @@
-/** @jsx jsx */
-import { jsx, Label, Input } from 'theme-ui';
-import Form from '../Form'
+import { Input, FormControl, FormLabel, FormErrorMessage } from '@chakra-ui/core';
+import { Field } from 'react-final-form';
 import { useRouter } from 'next/router';
 import * as z from 'zod';
-import { api } from '@poolbase/common';
+
+import { api } from 'lib/api';
+
+import Form from '../Form';
 
 export const AddUrlForm: React.FC = () => {
   const router = useRouter();
@@ -15,9 +17,16 @@ export const AddUrlForm: React.FC = () => {
     }
   };
   return (
-    <Form onSubmit={onSubmit} schema={z.string()} submitText="Add">
-      <Label htmlFor="url">URL</Label>
-      <Input name="url" defaultValue={router.query.url ? router.query.url : ''} required />
+    <Form onSubmit={onSubmit} schema={z.string()} submitText="Add" initialValues={{ url: router.query.url || '' }}>
+      <Field name="url">
+        {({ input, meta }) => (
+          <FormControl isInvalid={meta.error}>
+            <FormLabel htmlFor={input.name}>URL</FormLabel>
+            <Input {...input} />
+            {meta.error && meta.touched && <FormErrorMessage>{meta.error}</FormErrorMessage>}
+          </FormControl>
+        )}
+      </Field>
     </Form>
   );
 };

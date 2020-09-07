@@ -1,10 +1,10 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
+import * as React from 'react';
 import { NextPage } from 'next';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import { ListItem } from '@poolbase/design-system/src/components/ListItem';
-import { PageData, firestore } from '@poolbase/common';
+import { ListItem } from 'components/ListItem';
+import { firestore } from 'lib/initFirebase';
+import { PageData } from 'lib/types';
 import { AddUrlForm } from 'components/AddUrlForm';
 
 const AddUrlPage: NextPage = () => {

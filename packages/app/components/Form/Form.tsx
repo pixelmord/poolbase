@@ -1,10 +1,10 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
+import * as React from 'react';
 import { ReactNode, PropsWithoutRef } from 'react';
 import { Form as FinalForm, FormProps as FinalFormProps } from 'react-final-form';
-import { Form as StyledForm, SubmitButton } from '@poolbase/design-system';
 import * as z from 'zod';
 export { FORM_ERROR } from 'final-form';
+
+import SubmitButton from 'components/SubmitButton';
 
 type FormProps<FormValues> = {
   /** All your form fields */
@@ -20,7 +20,7 @@ export function Form<FormValues extends Record<string, unknown>>({
   children,
   submitText,
   schema,
-  initialValues ={},
+  initialValues = {},
   onSubmit,
   ...props
 }: FormProps<FormValues>) {
@@ -37,7 +37,7 @@ export function Form<FormValues extends Record<string, unknown>>({
       }}
       onSubmit={onSubmit}
       render={({ handleSubmit, submitting, submitError }) => (
-        <StyledForm onSubmit={handleSubmit} {...props}>
+        <form onSubmit={handleSubmit} {...props}>
           {/* Form fields supplied as children are rendered here */}
           {children}
 
@@ -47,10 +47,8 @@ export function Form<FormValues extends Record<string, unknown>>({
             </div>
           )}
 
-          <SubmitButton submitting={submitting}>
-            {submitText}
-          </SubmitButton>
-        </StyledForm>
+          <SubmitButton submitting={submitting}>{submitText}</SubmitButton>
+        </form>
       )}
     />
   );

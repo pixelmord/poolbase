@@ -1,6 +1,6 @@
 {
   "name": "@poolbase/browser-extension",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Save to Poolbase browser extension",
   "license": "MIT",
   "scripts": {
@@ -16,6 +16,12 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
       "@semantic-release/github",
       [
         "@semantic-release/git",
@@ -30,7 +36,6 @@
     ]
   },
   "dependencies": {
-    "@poolbase/common": "0.0.1",
     "consola": "^2.15.0",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^2.0.0",
@@ -50,32 +55,33 @@
     "@semantic-release/release-notes-generator": "^9.0.1",
     "@types/chrome": "0.0.122",
     "@types/copy-webpack-plugin": "^6.0.0",
+    "@types/dotenv-webpack": "^1.8.0",
     "@types/eslint": "^7.2.2",
     "@types/file-loader": "^4.2.0",
     "@types/fs-extra": "^9.0.1",
     "@types/prettier": "^2.1.0",
-    "@types/react": "^16.9.48",
+    "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.7",
     "@types/semantic-release": "^17.1.0",
-    "@types/webpack": "4.41.21",
+    "@types/webpack": "4.41.22",
     "@types/webpack-dev-server": "3.11.0",
     "@types/webpack-merge": "~4.1.5",
-    "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.10.1",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
     "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.0.3",
+    "copy-webpack-plugin": "^6.1.0",
     "css-loader": "^4.2.2",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "eslint-config-react-app": "^5.2.1",
     "eslint-plugin-flowtype": "^5.2.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
-    "file-loader": "^6.0.0",
+    "file-loader": "^6.1.0",
     "fs-extra": "^9.0.0",
     "html-loader": "1.3.0",
-    "html-webpack-plugin": "^4.3.0",
+    "html-webpack-plugin": "^4.4.1",
     "prettier": "^2.1.1",
     "react-hot-loader": "^4.12.21",
     "semantic-release": "^17.0.7",
@@ -86,7 +92,7 @@
     "webpack": "4.44.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "3.11.0",
-    "webpack-merge": "~5.1.2",
+    "webpack-merge": "~5.1.3",
     "write-file-webpack-plugin": "^4.5.1"
   }
 }

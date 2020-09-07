@@ -1,39 +1,38 @@
-import React from 'react';
+import * as React from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from 'theme-ui';
-
-import { poolbaseTheme } from '@poolbase/design-system/src/theme';
+import { Global, css } from '@emotion/core';
+import { ColorModeProvider, ThemeProvider, CSSReset } from '@chakra-ui/core';
 import I18n from 'lib/i18n';
-import '@poolbase/common/src/logger';
-import { UserContext, useAuthUserProfile } from 'hooks';
+import 'lib/logger';
 import PageLayout from 'components/PageLayout';
 
 export const App: React.FC<AppProps> = (props: AppProps) => {
   const { Component, pageProps } = props;
-  const [user, loading, error] = useAuthUserProfile();
-
   return (
-    <ThemeProvider theme={poolbaseTheme}>
-      <Head>
-        <title>Poolbase</title>
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    <ThemeProvider>
+      <ColorModeProvider value="dark">
+        <CSSReset />
+        <Global
+          styles={css`
+            #__next {
+              height: 100vh;
+            }
+          `}
         />
-        <meta name="viewport" content="uc-fitscreen=yes" />
-      </Head>
-      <I18n lngDict={pageProps.lngDict} locale={pageProps.lng}>
-        {loading && <div>Loading...</div>}
-        {error && <div>{error.message}</div>}
-        {!loading && !error && (
-          <UserContext.Provider value={{ user }}>
-            <PageLayout>
-              <Component {...pageProps} />
-            </PageLayout>
-          </UserContext.Provider>
-        )}
-      </I18n>
+        <Head>
+          <title>Poolbase</title>
+          <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+          />
+        </Head>
+        <I18n lngDict={pageProps.lngDict} locale={pageProps.lng}>
+          <PageLayout>
+            <Component {...pageProps} />
+          </PageLayout>
+        </I18n>
+      </ColorModeProvider>
     </ThemeProvider>
   );
 };

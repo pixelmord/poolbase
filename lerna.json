@@ -1,6 +1,6 @@
 {
   "lerna": "3.20.2",
-  "packages": ["./packages/*"],
+  "packages": ["./packages/app", "./packages/browser-extension"],
   "version": "0.1.0",
   "npmClient": "yarn"
 }

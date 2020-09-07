@@ -1,12 +1,13 @@
-/** @jsx jsx */
-import { jsx, Box, Label, Input, Checkbox } from 'theme-ui';
-import Form from '../Form'
+import { Box, Checkbox, FormLabel } from '@chakra-ui/core';
+import Form from '../Form';
 
-import { UserProfileData, UserProfileSchema, api } from '@poolbase/common';
+import { UserProfileData, UserProfileSchema } from 'lib/types';
+import { api } from 'lib/api';
+import LabeledTextField from 'components/LabeledTextField';
 
 export interface UserProfileProps {
-  profile: UserProfileData | {};
-  onSuccess?: () => void
+  profile: UserProfileData | Record<string, unknown>;
+  onSuccess?: () => void;
 }
 export const UserProfileForm: React.FC<UserProfileProps> = (props: UserProfileProps) => {
   const onSubmit = async (data): Promise<void> => {
@@ -20,20 +21,16 @@ export const UserProfileForm: React.FC<UserProfileProps> = (props: UserProfilePr
   };
   return (
     <Form onSubmit={onSubmit} schema={UserProfileSchema} initialValues={props.profile} submitText="Save">
-      <Label htmlFor="displayName">Name</Label>
-      <Input name="displayName" mb={3} />
-      <Label htmlFor="email">Email</Label>
-      <Input name="email" mb={3} />
+      <LabeledTextField name="displayName" label="Name" />
+      <LabeledTextField name="email" label="email" type="email" />
       <Box>
-        <Label mb={3}>
+        <FormLabel mb={3}>
           <Checkbox name="isEmailPublic" />
           Show email on profile
-        </Label>
+        </FormLabel>
       </Box>
-      <Label htmlFor="twitter">Twitter Username</Label>
-      <Input name="twitter" mb={3} />
-      <Label htmlFor="github">Github Username</Label>
-      <Input name="github" mb={3} />
+      <LabeledTextField name="twitter" label="Twitter Username" />
+      <LabeledTextField name="github" label="Github Username" />
     </Form>
   );
 };

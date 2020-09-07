@@ -1,18 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { auth } from 'firebase-admin';
+import { verifyIdToken } from 'lib/firebaseAdmin';
 
-// @TODO: refactor to use cloud function
-const handler = (
-  req: NextApiRequest & { session?: { decodedToken: auth.DecodedIdToken; token: string } },
-  res: NextApiResponse
-): void => {
+const handler = async (req: NextApiRequest & { headers?: { token: string } }, res: NextApiResponse<string>) => {
   // @TODO: forward the post data to callable firebase function
+  const token = req.headers.token;
+  try {
+    await verifyIdToken(token);
+    return res.status(200).send('authorized');
+  } catch (error) {
+    return res.status(401).send('You are unauthorised');
+  }
+};
 
-  res.end();
-};
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 export default handler;

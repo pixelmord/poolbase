@@ -1,31 +1,71 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { firestore, auth, UserAccountData } from '@poolbase/common';
+import { firestore, auth } from 'lib/initFirebase';
+import { UserAccountData, UserSessionData } from 'lib/types';
+import { removeUserCookie, setUserCookie, getUserFromCookie } from 'lib/userCookies';
+import { mapUserData } from 'lib/mapUserData';
 
-export const UserContext = createContext<{ user: UserAccountData | undefined }>({
-  user: undefined,
-});
+export const useSession = (): { user: UserSessionData | null; logout: () => void } => {
+  const [user, setUser] = useState<UserSessionData | null>(null);
+  const router = useRouter();
+  const logout = async () => {
+    return auth
+      .signOut()
+      .then(() => {
+        // Sign-out successful.
+        router.push('/en/login');
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  useEffect(() => {
+    // Firebase updates the id token every hour, this
+    // makes sure the react state and the cookie are
+    // both kept up to date
+    const cancelAuthListener = auth.onIdTokenChanged((user) => {
+      if (user) {
+        const userData = mapUserData(user);
+        setUserCookie(userData);
+        setUser(userData);
+      } else {
+        removeUserCookie();
+        setUser(null);
+      }
+    });
 
-export const useSession = (): UserAccountData | undefined => {
-  const { user } = useContext(UserContext);
-  return user;
+    const userFromCookie = getUserFromCookie();
+    if (!userFromCookie) {
+      router.push('/en');
+      return;
+    }
+    setUser(userFromCookie);
+
+    return () => {
+      cancelAuthListener();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return { user, logout };
 };
 
-export const useAuthUserProfile = (): [UserAccountData | undefined, boolean, Error | firebase.auth.Error | undefined] => {
+export const useAuthUserProfile = (): [UserAccountData | undefined, Error | firebase.auth.Error | undefined] => {
   const [returnValue, setReturnValue] = useState<{
     user: UserAccountData | undefined;
-    loading: boolean;
     error: Error | firebase.auth.Error | undefined;
   }>({
     user: undefined,
-    loading: true,
     error: undefined,
   });
-  const [user, loading, error] = useAuthState(auth);
+  const { user } = useSession();
 
-  const [userAccountDocReference, setUserAccountDocReference] = useState<{ref: null | firebase.firestore.DocumentReference}>({ ref: null });
+  const [userAccountDocReference, setUserAccountDocReference] = useState<{
+    ref: null | firebase.firestore.DocumentReference;
+  }>({ ref: null });
 
   const [userAccountData, dataAccountLoading, dataAccountError] = useDocumentData<UserAccountData & { id: string }>(
     userAccountDocReference.ref,
@@ -38,19 +78,6 @@ export const useAuthUserProfile = (): [UserAccountData | undefined, boolean, Err
     if (user && !userAccountDocReference.ref) {
       setUserAccountDocReference({ ref: firestore.doc(`users/${user.uid}`) });
     }
-    if (!loading && !user) {
-      setReturnValue({
-        ...returnValue,
-        loading: false,
-      });
-    }
-    if (error) {
-      setReturnValue({
-        ...returnValue,
-        error,
-        loading: false,
-      });
-    }
   }, [user]);
 
   useEffect(() => {
@@ -60,7 +87,6 @@ export const useAuthUserProfile = (): [UserAccountData | undefined, boolean, Err
         user: {
           ...userAccountData,
         },
-        loading: false,
       };
       setReturnValue(newReturnValue);
     }
@@ -68,10 +94,9 @@ export const useAuthUserProfile = (): [UserAccountData | undefined, boolean, Err
       setReturnValue({
         ...returnValue,
         error: dataAccountError,
-        loading: false,
       });
     }
   }, [userAccountData]);
 
-  return [returnValue.user, returnValue.loading, returnValue.error];
+  return [returnValue.user, returnValue.error];
 };

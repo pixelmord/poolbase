@@ -2,7 +2,7 @@
 import firebase from 'firebase/app';
 import React, { useEffect, useState } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import { auth } from '@poolbase/common';
+import { auth } from 'lib/initFirebase';
 
 // Init the Firebase app.
 

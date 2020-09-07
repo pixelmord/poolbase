@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "moduleResolution": "node",
@@ -18,6 +19,7 @@
     "paths": {
       "components/*": ["components/*"],
       "hooks/*": ["hooks/*"],
+      "locales/*": ["locales/*"],
       "lib/*": ["lib/*"]
     }
   },

@@ -19,5 +19,8 @@
   "functions": {
     "source": "dist/functions",
     "predeploy": ["yarn workspace @poolbase/firebase build"]
+  },
+  "storage": {
+    "rules": "packages/firebase/rules/storage.rules"
   }
 }

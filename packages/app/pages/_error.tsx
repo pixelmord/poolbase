@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
-import useI18n from '../hooks/use-i18n';
-import { contentLanguageMap } from '../lib/i18n';
+import useI18n from 'hooks/use-i18n';
+import { contentLanguageMap } from 'lib/i18n';
 interface ErrorPageProps {
   statusCode: null | number | undefined;
 }

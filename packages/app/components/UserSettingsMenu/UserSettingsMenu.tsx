@@ -1,36 +1,48 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
-
 import {
-  Avatar,
-  NavIconButton,
-  DialogWrapper,
-  Dialog,
-  DialogDisclosure,
-  DialogBackdrop,
-} from '@poolbase/design-system';
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  useDisclosure,
+} from '@chakra-ui/core';
 
-import { useSession } from 'hooks';
+import { useAuthUserProfile } from 'hooks';
 
 import UserAccountForm from 'components/UserAccountForm';
+import NavIconButton from 'components/NavIconButton';
+import Avatar from 'components/Avatar';
 
 export const UserSettingsMenu: React.FC = () => {
-  const user = useSession();
+  const [user] = useAuthUserProfile();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  if (!user) {
+    return null;
+  }
+  const icon = () => <Avatar user={user.profile} />;
   return (
-    <DialogWrapper>
-      <DialogDisclosure as={NavIconButton}>
-        {user ? (
-          <Avatar user={user.profile} />
-        ) : null}
-      </DialogDisclosure>
-      <DialogBackdrop>
-        <Dialog aria-label="User Configuration">
-          {() => {
-            return <UserAccountForm account={user || {}} />;
-          }}
-        </Dialog>
-      </DialogBackdrop>
-    </DialogWrapper>
+    <>
+      <NavIconButton aria-label="Open User Form" onClick={onOpen} icon={icon} />
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>User Profile</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <UserAccountForm account={user || {}} />
+          </ModalBody>
+
+          <ModalFooter>
+            <Button variantColor="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 export default UserSettingsMenu;

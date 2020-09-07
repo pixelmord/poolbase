@@ -1,24 +1,18 @@
-/** @jsx jsx */
-/* eslint react/no-danger: 0 */
-import { jsx, Box } from 'theme-ui';
+import * as React from 'react';
+import { Box } from '@chakra-ui/core';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 export default class CustomDocument extends Document<{ lang: string }> {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx);
     const { pathname } = ctx;
-    const lang = pathname.startsWith("/de/") ? "de" : "en";
+    const lang = pathname.startsWith('/de/') ? 'de' : 'en';
     return { ...initialProps, lang };
   }
   public render(): JSX.Element {
     const { lang } = this.props;
     return (
-      <Html
-        sx={{
-          height: '100%',
-        }}
-        lang={lang}
-      >
+      <Html lang={lang}>
         <Head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -49,8 +43,6 @@ export default class CustomDocument extends Document<{ lang: string }> {
 
           <meta name="nightmode" content="enable" />
 
-
-
           <meta name="layoutmode" content="fitscreen" />
 
           <meta name="screen-orientation" content="portrait" />
@@ -77,15 +69,7 @@ export default class CustomDocument extends Document<{ lang: string }> {
 
           <link href="/manifest.json" rel="manifest" />
         </Head>
-        <Box
-          as="body"
-          sx={{
-            height: '100%',
-            '& > div:first-child': {
-              height: '100%',
-            },
-          }}
-        >
+        <Box as="body">
           <Main />
           <NextScript />
         </Box>

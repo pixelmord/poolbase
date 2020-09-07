@@ -1,41 +1,32 @@
-/** @jsx jsx */
-import { jsx } from 'theme-ui';
-import React, { PropsWithoutRef } from "react"
-import { useField } from "react-final-form"
+import { Input, InputProps, FormControl, FormControlProps, FormLabel, FormErrorMessage } from '@chakra-ui/core';
+import { PropsWithoutRef, forwardRef } from 'react';
+import { useField } from 'react-final-form';
 
-export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
-  /** Field name. */
-  name: string
+export interface LabeledTextFieldProps extends PropsWithoutRef<InputProps> {
+  name: string;
   /** Field label. */
-  label: string
+  label: string;
   /** Field type. Doesn't include radio buttons and checkboxes */
-  type?: "text" | "password" | "email" | "number"
-  outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>
+  type?: 'text' | 'password' | 'email' | 'number';
+  outerProps?: PropsWithoutRef<FormControlProps>;
 }
 
-export const LabeledTextField = React.forwardRef<HTMLInputElement, LabeledTextFieldProps>(
-  ({ name, label, outerProps, ...props }, ref) => {
+// eslint-disable-next-line react/display-name
+export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
+  ({ name, label, outerProps, type = 'text', ...props }: LabeledTextFieldProps, ref) => {
     const {
       input,
-      meta: { touched, error, submitError, submitting },
-    } = useField(name)
+      meta: { touched, error, submitting },
+    } = useField(name);
 
     return (
-      <div {...outerProps}>
-        <label>
-          {label}
-          <input {...input} disabled={submitting} {...props} ref={ref} />
-        </label>
-
-        {touched && (error || submitError) && (
-          <div role="alert" style={{ color: "red" }}>
-            {error || submitError}
-          </div>
-        )}
-      </div>
-    )
+      <FormControl isInvalid={error} {...outerProps}>
+        <FormLabel htmlFor={input.name}>{label}</FormLabel>
+        <Input {...input} {...props} isDisabled={submitting} ref={ref} type={type} />
+        {error && touched && <FormErrorMessage>{error}</FormErrorMessage>}
+      </FormControl>
+    );
   }
-)
+);
 
-export default LabeledTextField
-
+export default LabeledTextField;
