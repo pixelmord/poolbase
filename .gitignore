@@ -95,3 +95,5 @@ dist/
 .bic_cache
 
 serviceAccountKey.json
+
+.vercel
