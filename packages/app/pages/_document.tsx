@@ -3,13 +3,21 @@
 import { jsx, Box } from 'theme-ui';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
-export default class CustomDocument extends Document {
+export default class CustomDocument extends Document<{ lang: string }> {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx);
+    const { pathname } = ctx;
+    const lang = pathname.startsWith("/de/") ? "de" : "en";
+    return { ...initialProps, lang };
+  }
   public render(): JSX.Element {
+    const { lang } = this.props;
     return (
       <Html
         sx={{
           height: '100%',
         }}
+        lang={lang}
       >
         <Head>
           <meta charSet="utf-8" />
