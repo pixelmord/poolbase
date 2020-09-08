@@ -6,11 +6,13 @@ import { ListItem } from 'components/ListItem';
 import { firestore } from 'lib/initFirebase';
 import { PageData } from 'lib/types';
 
-import { useI18n } from 'hooks';
+import { useI18n, useSession } from 'hooks';
 import { languages } from 'lib/i18n';
 
 const HomePage: NextPage = () => {
-  const query = firestore.collection('pages').orderBy('created', 'desc').limit(30);
+  const { user } = useSession();
+  const uid = user?.uid || '';
+  const query = firestore.collection('pages').where('uid', '==', uid).orderBy('created', 'desc').limit(30);
   const [data, loading, error] = useCollectionData<PageData>(query, { idField: 'id' });
   const i18n = useI18n();
   return (
