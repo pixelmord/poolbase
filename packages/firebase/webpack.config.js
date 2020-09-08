@@ -23,7 +23,7 @@ module.exports = {
   },
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, '../../dist/functions'),
+    path: path.resolve(__dirname, './dist'),
     libraryTarget: 'commonjs',
   },
   plugins: [
