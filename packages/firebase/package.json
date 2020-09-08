@@ -6,6 +6,7 @@
     "start": "NODE_ENV=development firebase emulators:start",
     "dev": "yarn start",
     "build": "webpack",
+    "watch": "webpack --watch --progress",
     "typecheck-functions": "tsc --noEmit",
     "lint-functions": "eslint './functions/index.ts'",
     "execute-tests:functions": "jest './src/functions'",
