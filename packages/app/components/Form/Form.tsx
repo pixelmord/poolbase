@@ -36,7 +36,7 @@ export function Form<FormValues extends Record<string, unknown>>({
         }
       }}
       onSubmit={onSubmit}
-      render={({ handleSubmit, submitting, submitError }) => (
+      render={({ handleSubmit, submitting, pristine, submitError }) => (
         <form onSubmit={handleSubmit} {...props}>
           {/* Form fields supplied as children are rendered here */}
           {children}
@@ -47,7 +47,7 @@ export function Form<FormValues extends Record<string, unknown>>({
             </div>
           )}
 
-          <SubmitButton submitting={submitting}>{submitText}</SubmitButton>
+          <SubmitButton submitting={submitting} pristine={pristine}>{submitText}</SubmitButton>
         </form>
       )}
     />

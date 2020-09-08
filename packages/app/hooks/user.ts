@@ -42,7 +42,8 @@ export const useSession = (): { user: UserSessionData | null; logout: () => void
     if (!userFromCookie) {
       router.push(`/${activeLocale}/login`);
       return;
-    } else {
+    } else if (router.pathname === '/[lng]/login') {
+
       router.push(`/${activeLocale}`);
     }
     setUser(userFromCookie);
