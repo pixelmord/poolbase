@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { NextPage } from 'next';
 
-import { useI18n } from 'hooks';
+import { useI18n, useSession } from 'hooks';
 import { languages } from 'lib/i18n';
 import FirebaseAuth from 'components/FirebaseAuth';
 
 const LoginPage: NextPage = () => {
   const i18n = useI18n();
-
+  const { user } = useSession();
   return (
     <>
       <h1>{i18n.t('title')}</h1>
