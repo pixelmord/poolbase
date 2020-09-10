@@ -11,6 +11,7 @@ type URLData = zod.infer<typeof URLDataSchema>;
 export const addURLHandler = functions.region('europe-west1').https.onCall(
   async (data: URLData, context): Promise<void | DocumentReference<DocumentData>> => {
     // Checking that the user is authenticated.
+    // TODO: reinstate security @see: https://github.com/composableweb/poolbase/issues/76
     // if (!context.auth) {
     //   // Throwing an HttpsError so that the client gets the error details.
     //   throw new functions.https.HttpsError('unauthenticated', 'The function must be called while authenticated.');
