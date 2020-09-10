@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { auth } from '@poolbase/common';
+import { auth } from 'app/lib/initFirebase';
 import logo from '../../assets/img/logo.svg';
 import './Popup.css';
 

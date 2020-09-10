@@ -28,3 +28,5 @@ firebase-debug.log*
 
 # secrets
 secrets.*.js
+
+poolbase.zip

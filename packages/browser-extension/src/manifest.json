@@ -1,7 +1,7 @@
 {
   "name": "Poolbase",
-  "version": "0.1.0",
-  "description": "Save pages and highlighted text to poolbase and build a knowledge base while you research the web",
+  "version": "0.1.1",
+  "description": "Save pages, annotations and highlighted text to poolbase.FYI and build a knowledge base while you research the web",
   "homepage_url": "https://app.poolbase.fyi",
   "icons": {
     "16": "icon16.png",
@@ -23,7 +23,6 @@
   },
   "content_scripts": [
     {
-      "matches": ["http://*/*", "https://*/*", "<all_urls>"],
       "js": ["contentScript.bundle.js"],
       "css": ["content.styles.css"]
     }
@@ -31,5 +30,5 @@
   "web_accessible_resources": ["content.styles.css", "icon128.png", "icon38.png"],
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "permissions": ["identity"]
+  "permissions": ["identity", "activeTab", "tabs"]
 }
