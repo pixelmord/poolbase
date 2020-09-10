@@ -2,9 +2,9 @@ import * as functions from 'firebase-functions';
 import * as zod from 'zod';
 import { WriteResult } from '@google-cloud/firestore';
 
-import admin, { firestore } from '../initFirebaseAdmin';
+import admin, { firestore } from '../lib/initFirebaseAdmin';
 
-import { UserProfileSchema, UserProfileData } from '../common';
+import { UserProfileSchema, UserProfileData } from '../lib';
 
 export const saveUserProfileHandler = functions.region('europe-west1').https.onCall(
   async (data: UserProfileData, context): Promise<void | WriteResult> => {

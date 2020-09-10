@@ -75,3 +75,5 @@ src/app/public/workbox-*.js
 src/app/public/workbox-*.js.map
 locales
 dist
+
+.runtimeconfig.json

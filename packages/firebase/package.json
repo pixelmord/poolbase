@@ -51,6 +51,8 @@
     "node": "10"
   },
   "dependencies": {
+    "@elastic/app-search-node": "^7.9.0",
+    "@elastic/elasticsearch": "^7.9.0",
     "consola": "^2.15.0",
     "firebase": "^7.19.1",
     "firebase-admin": "^9.1.1",

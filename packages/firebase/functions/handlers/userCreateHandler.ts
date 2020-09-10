@@ -1,5 +1,5 @@
 import * as functions from 'firebase-functions';
-import admin, { firestore } from '../initFirebaseAdmin';
+import admin, { firestore } from '../lib/initFirebaseAdmin';
 
 const ACCOUNT_DEFAULT_VALUES = {
   isSubscribedToNL: false,
