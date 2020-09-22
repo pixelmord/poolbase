@@ -17,14 +17,8 @@ const config = {
 const app = !firebase.apps.length ? firebase.initializeApp(config) : firebase.apps[0];
 const firestore = firebase.firestore();
 let functions;
-console.log(process.env.NODE_ENV);
-if (
-  typeof location !== 'undefined' &&
-  location.hostname &&
-  location.hostname === 'localhost' &&
-  process.env.NODE_ENV === 'development'
-) {
-console.log(process.env.NODE_ENV, location);
+
+if (process.env.NODE_ENV === 'development') {
   firestore.settings({
     host: 'localhost:8080',
     ssl: false,
