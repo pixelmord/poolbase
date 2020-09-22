@@ -12,9 +12,10 @@ import { languages } from 'lib/i18n';
 const HomePage: NextPage = () => {
   const { user } = useSession();
   const uid = user?.uid || '';
-  const query = firestore.collection('pages').where('uid', '==', uid).orderBy('created', 'desc').limit(30);
+  const query = firestore.collection('pages').where('uid', '==', uid).orderBy('createdAt', 'desc').limit(30);
   const [data, loading, error] = useCollectionData<PageData>(query, { idField: 'id' });
   const i18n = useI18n();
+
   return (
     <>
       <h1>{i18n.t('siteTitle')}</h1>

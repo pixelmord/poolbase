@@ -8,7 +8,7 @@ import { PageData } from 'lib/types';
 import { AddUrlForm } from 'components/AddUrlForm';
 
 const AddUrlPage: NextPage = () => {
-  const query = firestore.collection('pages').orderBy('created', 'desc').limit(3);
+  const query = firestore.collection('pages').orderBy('createdAt', 'desc').limit(3);
   const [data, loading, error] = useCollectionData<PageData>(query, { idField: 'id' });
 
   return (

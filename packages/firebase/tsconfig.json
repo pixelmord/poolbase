@@ -11,8 +11,7 @@
     "module": "commonjs",
     "strict": true,
     "target": "es2018",
-    "baseUrl": ".",
-    "outDir": "../../dist/functions"
+    "baseUrl": "."
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts", "**/*.js"]

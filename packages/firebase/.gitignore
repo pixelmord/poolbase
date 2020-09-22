@@ -77,3 +77,4 @@ locales
 dist
 
 .runtimeconfig.json
+test-data
