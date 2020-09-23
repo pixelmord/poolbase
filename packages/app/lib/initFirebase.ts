@@ -1,7 +1,9 @@
+/* eslint-disable import/no-duplicates */
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/functions';
 import 'firebase/auth';
+import 'firebase/storage';
 
 const config = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY,
@@ -30,8 +32,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const auth = firebase.auth(app);
+const storage = firebase.storage();
 
-
-export { app, auth, firestore, functions };
+export { app, auth, firestore, functions, storage };
 
 export default firebase;

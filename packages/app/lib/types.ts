@@ -2,7 +2,7 @@ import * as zod from 'zod';
 export type UserSessionData = {
   uid: string;
   email: string;
-  token: string
+  token: string;
 };
 export interface AuthUser {
   uid: string;
@@ -46,6 +46,8 @@ export const PageSchema = zod.object({
   mainText: zod.string().nullable().optional(),
   metaIconUrl: zod.string().nullable().optional(),
   mainImageUrl: zod.string().nullable().optional(),
+  screenshotFullUrl: zod.string().optional(),
+  screenshotPreviewUrl: zod.string().optional(),
   processed: zod.object({
     html: zod.boolean().nullable().optional(),
   }),

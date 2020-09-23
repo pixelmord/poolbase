@@ -15,7 +15,7 @@ export const scrapeHTML = async (url: string, pageId: string): Promise<ScrapeDat
     if (!pageId || pageId === '') {
       throw new Error('No pageId provided');
     }
-    const path = `/screenshots/${size}/${pageId}.png`;
+    const path = `screenshots/${size}/${pageId}.png`;
     // Create a file object
     const file = bucket.file(path);
 
