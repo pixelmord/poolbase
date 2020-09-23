@@ -1,7 +1,7 @@
 import puppeteer, { ConsoleMessage } from 'puppeteer';
-import { bucket } from '../initFirebaseAdmin';
+import { bucket } from '../lib/initFirebaseAdmin';
 
-import { PageData } from '../common';
+import { PageData } from '../lib';
 
 type ScrapeData = Partial<PageData> & {
   'processed.html': boolean;
@@ -15,14 +15,14 @@ export const scrapeHTML = async (url: string, pageId: string): Promise<ScrapeDat
     if (!pageId || pageId === '') {
       throw new Error('No pageId provided');
     }
-
+    const path = `screenshots/${size}/${pageId}.png`;
     // Create a file object
-    const file = bucket.file(`/screenshots/${size}/${pageId}.png`);
+    const file = bucket.file(path);
 
     // Save the image
     await file.save(imageBuffer);
 
-    return 'saved screenshot!';
+    return path;
   };
 
   const urlObject = new URL(url);
@@ -239,9 +239,14 @@ export const scrapeHTML = async (url: string, pageId: string): Promise<ScrapeDat
   }
   try {
     let imageBuffer: string | Buffer = await page.screenshot();
-    await saveScreenShot(imageBuffer, pageId);
+    const screenshotPreviewUrl = await saveScreenShot(imageBuffer, pageId);
     imageBuffer = await page.screenshot({ fullPage: true });
-    await saveScreenShot(imageBuffer, pageId, 'full');
+    const screenshotFullUrl = await saveScreenShot(imageBuffer, pageId, 'full');
+    data = {
+      ...data,
+      screenshotPreviewUrl,
+      screenshotFullUrl,
+    };
   } catch (err) {
     console.error(err);
   }

@@ -10,7 +10,7 @@ import { contentLanguageMap } from 'lib/i18n';
 
 const PageLayout: NextPage = (props: React.PropsWithChildren<{}>): JSX.Element => {
   const { children } = props;
-  const user = useSession();
+  const { user } = useSession();
   const i18n = useI18n();
   return (
     <>

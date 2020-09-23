@@ -46,6 +46,8 @@ export const PageSchema = zod.object({
   mainText: zod.string().nullable().optional(),
   metaIconUrl: zod.string().nullable().optional(),
   mainImageUrl: zod.string().nullable().optional(),
+  screenshotFullUrl: zod.string().optional(),
+  screenshotPreviewUrl: zod.string().optional(),
   processed: zod.object({
     html: zod.boolean().nullable().optional(),
   }),

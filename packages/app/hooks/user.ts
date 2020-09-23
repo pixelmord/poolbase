@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
 import { firestore, auth } from 'lib/initFirebase';
 import { UserAccountData, UserSessionData } from 'lib/types';
 import { removeUserCookie, setUserCookie, getUserFromCookie } from 'lib/userCookies';
 import { mapUserData } from 'lib/mapUserData';
+import useI18n from './use-i18n';
 
 export const useSession = (): { user: UserSessionData | null; logout: () => void } => {
   const [user, setUser] = useState<UserSessionData | null>(null);
+  const { activeLocale } = useI18n();
   const router = useRouter();
   const logout = async () => {
     return auth
       .signOut()
       .then(() => {
         // Sign-out successful.
-        router.push('/en/login');
+        router.push(`/${activeLocale}/login`);
       })
       .catch((e) => {
         console.error(e);
@@ -39,8 +40,11 @@ export const useSession = (): { user: UserSessionData | null; logout: () => void
 
     const userFromCookie = getUserFromCookie();
     if (!userFromCookie) {
-      router.push('/en');
+      router.push(`/${activeLocale}/login`);
       return;
+    } else if (router.pathname === '/[lng]/login') {
+
+      router.push(`/${activeLocale}`);
     }
     setUser(userFromCookie);
 

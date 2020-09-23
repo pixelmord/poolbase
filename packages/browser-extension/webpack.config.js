@@ -5,6 +5,7 @@ const webpack = require('webpack'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   WriteFilePlugin = require('write-file-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 // load the secrets
@@ -58,11 +59,12 @@ const options = {
     ],
   },
   resolve: {
+    plugins: [new TsconfigPathsPlugin({/* options: see below */ })],
     alias,
     extensions: fileExtensions.map((extension) => '.' + extension).concat([".wasm", ".ts", ".tsx", ".css", ".mjs", ".cjs", ".js", ".json"]),
   },
   plugins: [
-    new Dotenv({path: '../../.env'}),
+    new Dotenv({path: '../app/.env'}),
     new webpack.ProgressPlugin(),
     // clean the build folder
     new CleanWebpackPlugin({

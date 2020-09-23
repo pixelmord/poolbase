@@ -15,6 +15,19 @@ export default class CustomDocument extends Document<{ lang: string }> {
       <Html lang={lang}>
         <Head>
           <meta charSet="utf-8" />
+          {/* <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: `
+                if (/^en/.test(navigator.language) && /^de/.test(document.location.pathname.slice(1))) {
+                  window.location.href = document.location.protocol + '//' + document.location.host + '/en/' + document.location.pathname.split('/').slice(2).join('/');
+                }
+                if (/^de/.test(navigator.language) && /^en/.test(document.location.pathname.slice(1))) {
+                  window.location.href = document.location.protocol + '//' + document.location.host + '/de/' + document.location.pathname.split('/').slice(2).join('/');
+                }
+          `,
+            }}
+          /> */}
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
           <meta name="description" content="All your information in one place" />
@@ -33,7 +46,7 @@ export default class CustomDocument extends Document<{ lang: string }> {
           <meta name="msapplication-config" content="browserconfig.xml" />
 
           <meta name="application-name" content="Poolbase" />
-          <meta name="msapplication-tooltip" content="All your informnation in one place" />
+          <meta name="msapplication-tooltip" content="All your information in one place" />
           <meta name="msapplication-starturl" content="/" />
 
           <meta name="msapplication-tap-highlight" content="no" />

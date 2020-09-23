@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message === 'clicked_browser_action') {
-    console.log(window.location);
+  if (request.message === 'found_in_db') {
+    console.info(window.location);
   }
 });

@@ -31,10 +31,11 @@ service cloud.firestore {
     }
     // pages snapshots of a webpage at a given time
     match /pages/{pageId} {
-      allow read;
-      allow create: if isAuthenticated() && hasRequiredFields(['url']);
-      allow update: if isAuthenticated()
-                    && isOwner(); // TODO: add group level permissions
+      // TODO: reinstate security @see: https://github.com/composableweb/poolbase/issues/76
+      allow read, write;
+      // allow create: if isAuthenticated() && hasRequiredFields(['url']);
+      // allow update: if isAuthenticated()
+      //               && isOwner(); // TODO: add group level permissions
       allow delete: if false;
     }
     // app user accounts (private)

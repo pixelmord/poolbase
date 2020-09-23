@@ -6,7 +6,7 @@
     },
     "functions": {
       "host": "127.0.0.1",
-      "port": "5001"
+      "port": "5005"
     },
     "ui": {
       "enabled": true
@@ -17,8 +17,8 @@
     "indexes": "packages/firebase/firestore.indexes.json"
   },
   "functions": {
-    "source": "dist/functions",
-    "predeploy": ["yarn workspace @poolbase/firebase build"]
+    "source": "packages/firebase/dist",
+    "predeploy": ["npm --prefix ./packages/firebase/ run build"]
   },
   "storage": {
     "rules": "packages/firebase/rules/storage.rules"

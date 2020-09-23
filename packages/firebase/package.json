@@ -6,6 +6,7 @@
     "start": "NODE_ENV=development firebase emulators:start",
     "dev": "yarn start",
     "build": "webpack",
+    "watch": "webpack --watch --progress",
     "typecheck-functions": "tsc --noEmit",
     "lint-functions": "eslint './functions/index.ts'",
     "execute-tests:functions": "jest './src/functions'",
@@ -50,6 +51,8 @@
     "node": "10"
   },
   "dependencies": {
+    "@elastic/app-search-node": "^7.9.0",
+    "@elastic/elasticsearch": "^7.9.0",
     "consola": "^2.15.0",
     "firebase": "^7.19.1",
     "firebase-admin": "^9.1.1",
