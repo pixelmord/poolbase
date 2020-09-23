@@ -10,7 +10,7 @@ import { useI18n, useSession } from 'hooks';
 import { languages } from 'lib/i18n';
 import { Heading, Grid } from '@chakra-ui/core';
 
-const HomePage: NextPage = ({ lng }) => {
+const HomePage: NextPage = () => {
   const { user } = useSession();
   const uid = user?.uid || '';
   const query = firestore.collection('pages').where('uid', '==', uid).orderBy('createdAt', 'desc').limit(30);
