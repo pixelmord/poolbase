@@ -15,7 +15,7 @@ export default class CustomDocument extends Document<{ lang: string }> {
       <Html lang={lang}>
         <Head>
           <meta charSet="utf-8" />
-          <script
+          {/* <script
             type="text/javascript"
             dangerouslySetInnerHTML={{
               __html: `
@@ -27,7 +27,7 @@ export default class CustomDocument extends Document<{ lang: string }> {
                 }
           `,
             }}
-          />
+          /> */}
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 
           <meta name="description" content="All your information in one place" />
