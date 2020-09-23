@@ -1,3 +1,22 @@
+# @poolbase/app-v1.0.0 (2020-09-23)
+
+
+### Bug Fixes
+
+* build with undefined query param pageId ([d192ec1](https://github.com/pixelmord/poolbase/commit/d192ec14fb7afce81b7cb9260cd53dbd0645d649))
+* form handling, user session redirects ([f61ec80](https://github.com/pixelmord/poolbase/commit/f61ec80be78b961fcad9cf43d5cabc85aaf2fb57))
+* rename of db field ([22ea34c](https://github.com/pixelmord/poolbase/commit/22ea34ce8186c82101465e861cecf04e07b888b3))
+* **build:** type safety ([99b8896](https://github.com/pixelmord/poolbase/commit/99b88968f5e68cd7dd73a900b8ded3138325a975))
+
+
+### Features
+
+* content page stub, card lisings ([a766665](https://github.com/pixelmord/poolbase/commit/a76666528aca0a83c4756d0672971870c25bdadf))
+* save and display screenshot ([782b673](https://github.com/pixelmord/poolbase/commit/782b673fa624da96b00398248d0057ccf400b2f3))
+* **i18n:** poor man's redirect ([1d5414c](https://github.com/pixelmord/poolbase/commit/1d5414c53018e099ab06bff40f8cbbd4645528f1))
+* **i18n:** set lang attribute for server rendered ([cd6b240](https://github.com/pixelmord/poolbase/commit/cd6b24059a48b9573cac3004212304132b14ca4e))
+* initial poc roundtrip from web extension ([bd3127c](https://github.com/pixelmord/poolbase/commit/bd3127c2a816b26d6533c2af0ba7f72ce0dc37c0))
+
 # [poolbase-app-v1.0.2](https://github.com/ComposableWeb/poolbase/compare/poolbase-app-v1.0.1...poolbase-app-v1.0.2) (2020-04-24)
 
 
