@@ -39,6 +39,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'jsx-a11y/anchor-is-valid': 'off',
+    'import/no-named-as-default': 'off',
   },
   plugins: ['@typescript-eslint', 'jsx-a11y', 'prettier', 'import'],
 };
