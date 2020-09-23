@@ -13,15 +13,16 @@ export const pageUpdateHandler = functions
   .firestore.document('pages/{pageId}')
   .onUpdate(async (change, context) => {
     const page = change.after.data();
+    const pageId: string = context.params.pageId;
     try {
       if (typeof page !== 'undefined') {
-        const response = await elasticClient.updateDocuments(elasticEngineName, [
-          firebaseDataToElasticData({ ...page, id: context.params.pageId }),
+        const response = await elasticClient.indexDocuments(elasticEngineName, [
+          firebaseDataToElasticData({ ...page, id: pageId, type: 'pages' }),
         ]);
 
-        console.log(response);
+        functions.logger.info(`Updated Page ${pageId} saved to elasticsearch`, response);
       }
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   });

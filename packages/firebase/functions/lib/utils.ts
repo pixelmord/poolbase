@@ -11,13 +11,19 @@ export const firebaseDataToElasticData = function (origObj: Record<string, unkno
       val = origObj[key];
       newKey = key;
     }
-    // todo: sanitize timestamps
-    if (typeof val === 'object' && val !== null && Object.keys(val).length) {
+
+    if (!Array.isArray(val) && typeof val === 'object' && val !== null && Object.keys(val).length) {
       newVal = firebaseDataToElasticData(val as Record<string, unknown>);
     } else {
       newVal = val;
     }
-    newObj[newKey.toLowerCase()] = newVal;
+    // todo: sanitize timestamps
+    if (key === 'createdAt' || key === 'updatedAt') {
+      if (val && typeof (val as FirebaseFirestore.Timestamp).toDate === 'function') {
+        newVal = (val as FirebaseFirestore.Timestamp).toDate().toISOString();
+      }
+    }
+    newObj[newKey.replace(/[A-Z]/g, (m) => '_' + m.toLowerCase())] = newVal;
     return newObj;
   }, {});
 };
