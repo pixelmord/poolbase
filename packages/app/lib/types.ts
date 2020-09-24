@@ -39,6 +39,7 @@ export const PageSchema = zod.object({
   title: zod.string().optional(),
   status: zod.string().nullable(),
   metaKeywords: zod.array(zod.string()).nullable().optional(),
+  mainOutline: zod.array(zod.string()).nullable().optional(),
   metaDescription: zod.string().nullable().optional(),
   metaTitle: zod.string().nullable().optional(),
   metaAuthor: zod.string().nullable().optional(),

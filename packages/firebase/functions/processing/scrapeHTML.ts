@@ -225,11 +225,22 @@ export const scrapeHTML = async (url: string, pageId: string): Promise<ScrapeDat
       };
 
       const mainImageUrl = getMainImageUrl();
+
+      const getMainOutline = (): string[] | null => {
+        if (!main) {
+          return null;
+        }
+        const headlines = Array.from(main.querySelectorAll<HTMLElement>('h1, h2, h3, h4, h5, h6'));
+        return headlines.map((hl) => hl.innerText || '');
+      };
+      const mainOutline = getMainOutline();
       return {
         ...(mainText?.length && { mainText }),
         ...(mainImageUrl && { mainImageUrl }),
+        ...(mainOutline && { mainOutline }),
       };
     });
+
     data = {
       ...data,
       ...extractedFromBody,
