@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useColorMode } from '@chakra-ui/core';
 import Router from 'next/router';
-import { PlusSquare as Add, Moon, Sun, LogOut, Home, Globe } from 'react-feather';
+import { PlusSquare as Add, Moon, Sun, LogOut, Home, Globe, Search } from 'react-feather';
 
 import AppBar from 'components/AppBar';
 import NavIconButton from 'components/NavIconButton';
@@ -21,6 +21,13 @@ export default function Header(): JSX.Element {
           Router.push(`/${activeLocale}`);
         }}
         icon={Home}
+      ></NavIconButton>
+      <NavIconButton
+        aria-label="Search"
+        onClick={(): void => {
+          Router.push(`/${activeLocale}/search`);
+        }}
+        icon={Search}
       ></NavIconButton>
       <NavIconButton
         aria-label="Add URL"

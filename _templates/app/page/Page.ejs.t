@@ -1,27 +1,30 @@
+---
+to: "<%= h.src() %>/pages/[lng]/<%= name %>.tsx"
+---
 import * as React from 'react';
 import { NextPage, GetStaticPaths, GetStaticProps } from 'next';
+import { Heading } from '@chakra-ui/core';
 
 import { useI18n, useSession } from 'hooks';
 import { languages } from 'lib/i18n';
-import FirebaseAuth from 'components/FirebaseAuth';
 
-const LoginPage: NextPage = () => {
+const <%= Name %>Page: NextPage = () => {
   const i18n = useI18n();
   useSession();
   return (
     <>
-      <h1>{i18n.t('title')}</h1>
-      <FirebaseAuth />
+      <Heading>{i18n.t('title')}</Heading>
     </>
   );
 };
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const lng = String(params?.lng);
   const { default: common = {} } = await import(`locales/${lng}/common.json`);
-  const { default: login = {} } = await import(`locales/${lng}/login.json`);
+  const { default: <%= name %> = {} } = await import(`locales/${lng}/<%= name %>.json`);
   const lngDict = {
     ...common,
-    ...login,
+    ...<%= name %>,
   };
   return {
     props: { lng: lng, lngDict },
@@ -34,4 +37,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
     fallback: false,
   };
 };
-export default LoginPage;
+export default <%= Name %>Page;

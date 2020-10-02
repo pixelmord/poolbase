@@ -3,6 +3,8 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Global, css } from '@emotion/core';
 import { ColorModeProvider, ThemeProvider, CSSReset } from '@chakra-ui/core';
+
+import '@elastic/react-search-ui-views/lib/styles/styles.css';
 import I18n from 'lib/i18n';
 import 'lib/logger';
 import PageLayout from 'components/PageLayout';
